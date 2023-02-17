@@ -2,7 +2,7 @@
 
 Small CLI tool for some basic zigbee2mqtt interaractions.
 
-Commands Support:
+## Commands
 
 `groups show`
 
@@ -24,3 +24,16 @@ Add a device to a specified group
 
 Remove a device from a specified group
 
+## Usage
+
+You can run the shadowJar from Gradle to generate a JAR file. This jar file can then be run with the following command:
+
+`java -jar /path/to/jar/file.jar <args>`
+
+You can also add the `z2m-cli.sh` script to your PATH and use it to call it like any traditional CLI like this:
+
+`z2m-cli groups show`
+
+## Requirements
+
+Java 11
