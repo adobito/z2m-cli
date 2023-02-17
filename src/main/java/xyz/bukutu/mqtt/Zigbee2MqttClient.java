@@ -25,6 +25,7 @@ public class Zigbee2MqttClient {
             this.options = new MqttConnectOptions();
             this.options.setUserName(mqttConfig.getUser());
             this.options.setPassword(mqttConfig.getPassword().toCharArray());
+            client.connect(options);
         } catch (MqttException e) {
             throw new RuntimeException(e);
         }
