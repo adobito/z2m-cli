@@ -1,4 +1,4 @@
-package xyz.bukutu.records;
+package xyz.bukutu.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

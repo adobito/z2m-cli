@@ -2,27 +2,31 @@ package xyz.bukutu.mqtt;
 
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
-import xyz.bukutu.ConfigReader;
+import xyz.bukutu.Constants;
+import xyz.bukutu.YamlParser;
+import xyz.bukutu.dto.MqttConfig;
 
 public class Zigbee2MqttClient {
     private static Zigbee2MqttClient instance = null;
 
-    private final ConfigReader configReader;
-
     private MqttClient client;
+    private MqttConnectOptions options;
 
     private Zigbee2MqttClient() {
-        this.configReader = new ConfigReader();
+        String clientId = System.getProperty(Constants.CLIENT_ID_PROPERTY_LABEL);
+        if (clientId == null) {
+            clientId = Constants.DEFAULT_CLIENT_ID;
+        }
         try {
             MemoryPersistence persistence = new MemoryPersistence();
-            client = new MqttClient(configReader.getProperty("mqtt.brokerUrl"),
-                    configReader.getProperty("mqtt.clientId"), persistence);
-            MqttConnectOptions options = new MqttConnectOptions();
-            options.setUserName(configReader.getProperty("mqtt.username"));
-            options.setPassword(configReader.getProperty("mqtt.password").toCharArray());
-            client.connect(options);
+            MqttConfig mqttConfig = YamlParser.getMqttConfig();
+            client = new MqttClient(mqttConfig.getBrokerUrl(),
+                    clientId, persistence);
+            this.options = new MqttConnectOptions();
+            this.options.setUserName(mqttConfig.getUser());
+            this.options.setPassword(mqttConfig.getPassword().toCharArray());
         } catch (MqttException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -33,6 +37,13 @@ public class Zigbee2MqttClient {
         return instance;
     }
 
+    public static void connect() {
+        try {
+            getInstance().client.connect(getInstance().options);
+        } catch (MqttException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public static void disconnect() {
         try {
             getInstance().client.disconnect();

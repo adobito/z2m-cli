@@ -1,11 +1,15 @@
 package xyz.bukutu.cli;
 
-import picocli.CommandLine;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Spec;
+import picocli.CommandLine.Model.CommandSpec;
 
-@CommandLine.Command(name = "groups", subcommands = { ShowGroupsCommand.class, AddGroupCommand.class })
+@Command(name = "groups", subcommands = { ShowGroupsCommand.class, AddGroupCommand.class })
 public class GroupsCommand implements Runnable {
+    @Spec
+    CommandSpec spec;
     @Override
     public void run() {
-        System.out.println("Groups command executed");
+        spec.commandLine().getOut().println("Groups command executed");
     }
 }

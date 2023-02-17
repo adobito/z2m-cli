@@ -1,7 +1,8 @@
 package xyz.bukutu.cli;
 
 import picocli.CommandLine.Command;
-import picocli.CommandLine.Option;
+import picocli.CommandLine.Spec;
+import picocli.CommandLine.Model.CommandSpec;
 import picocli.CommandLine.Parameters;
 import picocli.CommandLine.ParentCommand;
 import xyz.bukutu.mqtt.Zigbee2MqttClient;
@@ -13,6 +14,8 @@ public class AddGroupCommand implements Runnable {
     @ParentCommand
     private GroupsCommand parent;
 
+    @Spec
+    CommandSpec spec;
 
     @Parameters(index = "0", description = "The group name")
     private String groupName;
@@ -20,7 +23,7 @@ public class AddGroupCommand implements Runnable {
     @Override
     public void run() {
         try {
-            System.out.println("Add group command executed with group name " + groupName);
+            spec.commandLine().getOut().println("Add group command executed with group name " + groupName);
             Zigbee2MqttClient.getInstance().publish(TOPIC_NAME, generatePayloadString(groupName));
         }catch (Exception e) {
             throw new RuntimeException(e);

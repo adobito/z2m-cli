@@ -1,8 +1,10 @@
 package xyz.bukutu.cli;
 
 import org.eclipse.paho.client.mqttv3.MqttException;
-import picocli.CommandLine;
 import picocli.CommandLine.Command;
+import picocli.CommandLine.Spec;
+import picocli.CommandLine.Model.CommandSpec;
+import picocli.CommandLine.ParentCommand;
 import picocli.CommandLine.Parameters;
 import xyz.bukutu.mqtt.Zigbee2MqttClient;
 
@@ -11,15 +13,19 @@ public class GroupAddCommand implements Runnable {
 
     private static final String TOPIC_NAME = "zigbee2mqtt/bridge/request/group/members/add";
     private static final String PAYLOAD_TEMPLATE = "{\"group\": \"<group>\", \"device\": \"<device>\"}";
-    @CommandLine.ParentCommand
+    @ParentCommand
     private GroupCommand groupCommand;
+
+    @Spec
+    CommandSpec spec;
     @Parameters(index = "0  ", description = "The device ID", arity = "1")
     private String deviceId;
+
 
     @Override
     public void run() {
         try {
-            System.out.printf("Adding device %s to group%n", deviceId, groupCommand.getGroupId());
+            spec.commandLine().getOut().printf("Adding device %s to group%n", deviceId, groupCommand.getGroupId());
             Zigbee2MqttClient.getInstance().publish(TOPIC_NAME, generatePayloadTemplate(this.groupCommand.getGroupId(), this.deviceId));
         } catch (MqttException e) {
             throw new RuntimeException(e);
