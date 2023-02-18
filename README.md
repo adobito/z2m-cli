@@ -30,11 +30,11 @@ You can run the shadowJar from Gradle to generate a JAR file. This jar file can 
 
 `java -jar /path/to/jar/file.jar <args>`
 
-You can also specify the location to your zigbee2mqtt config file using by passing the jar the `z2m.configPath` system proerty like this
+The default path for the Zigbee2Mqtt `configuration.yaml` is `/opt/zigbee2mqtt/data/configuration.yaml`. Alternatively, you can specify the location to your zigbee2mqtt config file using by passing the jar the `z2m.configPath` system property.
 
 `java -jar -Dz2m.configPath=/path/to/z2m/config /path/to/jar/file.jar <args>`
 
-You can also add the `z2m-cli.sh` script to your PATH and use it to call it like any traditional CLI like this:
+You can also add the `z2m-cli.sh` from the base folder script to your PATH and use it to call it like any traditional CLI like this:
 
 `z2m-cli groups show`
 
