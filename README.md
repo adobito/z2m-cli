@@ -8,7 +8,7 @@ Small CLI tool for some basic zigbee2mqtt interaractions.
 
 Show all groups friendly names from config file
 
-`groups add <groupName`
+`groups add <groupName>`
 
 Add a new group to zigbee2mqtt
 
