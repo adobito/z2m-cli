@@ -76,4 +76,16 @@ public class YamlParser {
             throw new RuntimeException(e);
         }
     }
+
+    public static boolean isPermitJoinEnabled() {
+        try {
+            var yaml = MAPPER.readValue(new File(FILE_LOCATION), JsonNode.class);
+            var permitJoin = yaml.get("permit_join").asBoolean();
+            return permitJoin;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }
