@@ -8,7 +8,7 @@ import xyz.bukutu.mqtt.Zigbee2MqttClient;
         description = "Disable permit join.")
 public class PermitJoinDisableCommand implements Runnable {
 
-    private static final String TOPIC_NAME = "zigbee2mqtt/bridge/config/permit_join";
+    private static final String TOPIC_NAME = "zigbee2mqtt/bridge/request/permit_join";
 
     @CommandLine.Spec
     private CommandLine.Model.CommandSpec spec;
