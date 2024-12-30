@@ -14,7 +14,11 @@ Add a new group to zigbee2mqtt
 
 `devices show`
 
-Show all devices friendly names from config file
+Show all devices friendly names
+
+`devices remove <deviceId>`
+
+Remove a device by friendly name or IEEE Address. Accepts -f or --force to forve removal
 
 `group <groupName> add <deviceName>`
 
