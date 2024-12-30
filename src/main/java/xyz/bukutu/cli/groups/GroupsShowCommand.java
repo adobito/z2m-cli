@@ -26,13 +26,13 @@ public class GroupsShowCommand implements Runnable {
       var response =
           Zigbee2MqttClient.getInstance().readTopic(GROUPS_TOPIC, REQUEST_TIMEOUT_SECONDS);
       var mapper = new ObjectMapper();
-      var devices = mapper.readValue(response, new TypeReference<List<ZigbeeGroup>>() {});
+      var groups = mapper.readValue(response, new TypeReference<List<ZigbeeGroup>>() {});
       spec.commandLine()
           .getOut()
           .println(
               String.join(
                   "\n",
-                  devices.stream().map(ZigbeeGroup::getFriendlyName).collect(Collectors.toList())));
+                  groups.stream().map(ZigbeeGroup::getFriendlyName).collect(Collectors.toList())));
     } catch (MqttException e) {
       spec.commandLine().getOut().println("Error: " + e.getCause().getMessage());
     } catch (JsonProcessingException e) {

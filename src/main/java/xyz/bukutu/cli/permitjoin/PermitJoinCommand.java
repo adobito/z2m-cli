@@ -8,7 +8,8 @@ import picocli.CommandLine;
     subcommands = {
       //                PermitJoinShowCommand.class,
       PermitJoinEnableCommand.class,
-      PermitJoinDisableCommand.class
+      PermitJoinDisableCommand.class,
+      PermitJoinShowCommand.class
     })
 public class PermitJoinCommand implements Runnable {
 

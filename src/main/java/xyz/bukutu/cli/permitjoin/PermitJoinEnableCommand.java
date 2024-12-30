@@ -6,17 +6,23 @@ import xyz.bukutu.mqtt.Zigbee2MqttClient;
 
 @CommandLine.Command(name = "enable", description = "Enable permit join.")
 public class PermitJoinEnableCommand implements Runnable {
-  private static final String TOPIC_NAME = "zigbee2mqtt/bridge/request/permit_join";
+  private static final String REQUEST_TOPIC = "zigbee2mqtt/bridge/request/permit_join";
+
+  private static final String RESPONSE_TOPIC = "zigbee2mqtt/bridge/response/permit_join";
+
+  private static final long REQUEST_TIMEOUT_SECONDS = 5l;
   @CommandLine.Spec private CommandLine.Model.CommandSpec spec;
 
   @Override
   public void run() {
     try {
       final var mqtt = Zigbee2MqttClient.getInstance();
-      mqtt.publish(TOPIC_NAME, true + "");
-      this.spec.commandLine().getOut().println("Permit Join Enabled");
-    } catch (final MqttException e) {
-      throw new RuntimeException(e);
+      var response =
+          mqtt.publishWithResponse(
+              REQUEST_TOPIC, true + "", RESPONSE_TOPIC, REQUEST_TIMEOUT_SECONDS);
+      this.spec.commandLine().getOut().println(response);
+    } catch (MqttException e) {
+      spec.commandLine().getOut().println("Error: " + e.getCause().getMessage());
     }
   }
 }
