@@ -6,7 +6,7 @@ Small CLI tool for some basic zigbee2mqtt interaractions.
 
 `groups show`
 
-Show all groups friendly names from config file
+Show all groups friendly names
 
 `groups add <groupName>`
 
@@ -27,6 +27,10 @@ Add a device to a specified group
 `group <groupName< remove <deviceName>`
 
 Remove a device from a specified group
+
+`permitJoin show`
+
+Shows permit_join status
 
 `permitJoin enable`
 
