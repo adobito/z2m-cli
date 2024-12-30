@@ -1,4 +1,4 @@
-package xyz.bukutu.cli;
+package xyz.bukutu.cli.groups.group;
 
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Model.CommandSpec;

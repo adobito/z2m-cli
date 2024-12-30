@@ -1,4 +1,4 @@
-package xyz.bukutu.cli;
+package xyz.bukutu.cli.groups.group;
 
 import org.eclipse.paho.client.mqttv3.MqttException;
 import picocli.CommandLine.Command;
@@ -8,17 +8,17 @@ import picocli.CommandLine.ParentCommand;
 import picocli.CommandLine.Spec;
 import xyz.bukutu.mqtt.Zigbee2MqttClient;
 
-@Command(name = "add", description = "Add a device to a group")
-public class GroupAddCommand implements Runnable {
+@Command(name = "remove", description = "Remove a device from a group")
+public class GroupRemoveCommand implements Runnable {
 
-  private static final String TOPIC_NAME = "zigbee2mqtt/bridge/request/group/members/add";
+  private static final String TOPIC_NAME = "zigbee2mqtt/bridge/request/group/members/remove";
   private static final String PAYLOAD_TEMPLATE =
       "{\"group\": \"<group>\", \"device\": \"<device>\"}";
   @ParentCommand private GroupCommand groupCommand;
 
   @Spec CommandSpec spec;
 
-  @Parameters(index = "0  ", description = "The device ID", arity = "1")
+  @Parameters(index = "0", description = "The device ID")
   private String deviceId;
 
   @Override
@@ -26,7 +26,7 @@ public class GroupAddCommand implements Runnable {
     try {
       spec.commandLine()
           .getOut()
-          .printf("Adding device %s to group%n", deviceId, groupCommand.getGroupId());
+          .printf("Removing device %s from group %s%n", deviceId, groupCommand.getGroupId());
       Zigbee2MqttClient.getInstance()
           .publish(
               TOPIC_NAME, generatePayloadTemplate(this.groupCommand.getGroupId(), this.deviceId));

@@ -1,4 +1,4 @@
-package xyz.bukutu.cli;
+package xyz.bukutu.cli.groups;
 
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Model.CommandSpec;
@@ -8,7 +8,7 @@ import picocli.CommandLine.Spec;
 import xyz.bukutu.mqtt.Zigbee2MqttClient;
 
 @Command(name = "add")
-public class AddGroupCommand implements Runnable {
+public class GroupsAddCommand implements Runnable {
   private static final String TOPIC_NAME = "zigbee2mqtt/bridge/request/group/add";
   private static final String PAYLOAD_TEMPLATE = "%s";
   @ParentCommand private GroupsCommand parent;

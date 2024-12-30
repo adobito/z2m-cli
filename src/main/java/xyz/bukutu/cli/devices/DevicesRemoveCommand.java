@@ -1,4 +1,4 @@
-package xyz.bukutu.cli;
+package xyz.bukutu.cli.devices;
 
 import picocli.CommandLine;
 import picocli.CommandLine.Command;

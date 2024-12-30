@@ -5,6 +5,9 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Model.CommandSpec;
 import picocli.CommandLine.Spec;
 import xyz.bukutu.cli.device.DeviceCommand;
+import xyz.bukutu.cli.devices.DevicesCommand;
+import xyz.bukutu.cli.groups.GroupsCommand;
+import xyz.bukutu.cli.groups.group.GroupCommand;
 import xyz.bukutu.cli.permitjoin.PermitJoinCommand;
 import xyz.bukutu.mqtt.Zigbee2MqttClient;
 
